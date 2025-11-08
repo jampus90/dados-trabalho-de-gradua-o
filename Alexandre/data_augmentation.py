@@ -17,8 +17,8 @@ def filter_hallucinations(original_text, augmented_text):
     return augmented_text
 
 def main():
-    cleaned_data = Path('Alexandre/dados_tratados')
-    augmented_csv_path = Path('Alexandre/dados_aumentados')
+    cleaned_data = Path('dados_tratados_geral')
+    augmented_csv_path = Path('dados_aumentados_back_translation')
     augmented_csv_path.mkdir(parents=True, exist_ok=True)
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
