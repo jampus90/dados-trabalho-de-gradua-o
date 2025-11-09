@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 
 DESTINY_PATH = Path('concat_file')
-FILE_PATH = Path('dados_tratados_geral')
+FILE_PATH = Path('dados_aumentados_back_translation')
 FILE_TYPE = '*.csv'
 
 DESTINY_PATH.mkdir(parents=True, exist_ok=True)
@@ -19,15 +19,10 @@ file_3 = pd.read_csv('full_test_split.csv')
 
 ref_df = pd.concat([file_1, file_2, file_3])
 
-# --- CORREÇÃO PRINCIPAL AQUI ---
-# Força o Participant_ID a ser numérico, ignorando erros (vira NaN se não for número)
 ref_df['Participant_ID'] = pd.to_numeric(ref_df['Participant_ID'], errors='coerce')
-# Remove IDs que não são números válidos
 ref_df = ref_df.dropna(subset=['Participant_ID'])
-# Converte para inteiro
 ref_df['Participant_ID'] = ref_df['Participant_ID'].astype(int)
 
-# Define o índice e garante que não há duplicatas que quebrariam o .loc
 ref_df = ref_df.drop_duplicates(subset=['Participant_ID'])
 ref_df = ref_df.set_index('Participant_ID')
 # -------------------------------
@@ -65,4 +60,4 @@ print(f"Total processado: {len(new_df)}")
 print(f"Scores encontrados: {new_df['phq8_score'].notnull().sum()}")
 print(f"Scores faltando: {new_df['phq8_score'].isnull().sum()}")
 
-new_df.to_csv(DESTINY_PATH / 'concatened_data.csv', index=False)
+new_df.to_csv(DESTINY_PATH / 'concatened_data_back_translation.csv', index=False)
