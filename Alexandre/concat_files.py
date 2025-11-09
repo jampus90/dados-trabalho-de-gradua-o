@@ -13,8 +13,6 @@ all_data = []
 # 1. Carrega e limpa referências
 file_1 = pd.read_csv('dev_split_Depression_AVEC2017.csv')
 file_2 = pd.read_csv('train_split_Depression_AVEC2017.csv')
-# AVISO: Verifique se o arquivo de TESTE realmente tem a coluna PHQ8_Score. 
-# Em muitas competições ela não vem. Se não tiver, comente a linha abaixo.
 file_3 = pd.read_csv('full_test_split.csv') 
 
 ref_df = pd.concat([file_1, file_2, file_3])
